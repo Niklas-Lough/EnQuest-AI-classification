@@ -1,0 +1,165 @@
+{
+  "version": "Draft E",
+  "hazard": {
+    "field": "AI_Hazard_Category",
+    "precedence_rules": [
+      "Major Accident Hazard overrides everything. Any credible loss-of-containment, well-control, or hazardous-area-integrity content takes the MAH label, even if an energy source is also named.",
+      "A named energy overrides Safety Systems. \"Guard removed from grinder\" is Mechanical -- the energy the barrier controls. Safety Systems applies only when the barrier/system itself is the subject and no specific energy dominates (\"extinguisher blocked\").",
+      "Among competing energies, the most severe credible outcome wins. A dropped object from height during lifting is Gravity rather than Motion.",
+      "Personal exposure vs. environmental harm. Chemical contact with people is Chemical; a release to the environment is Environment. Weather, sea state, ice, and lighting conditions are Environment.",
+      "Ergonomic/manual-handling strain is Other Hazard; body position in the line of fire of moving equipment is Motion.",
+      "Behaviour is never the label. Classify what the person is exposed to; the Human Factors dimension owns the behavioural driver.",
+      "Positive observations receive the hazard they successfully controlled (\"good barriers around the lifting area\" is Motion). Pure praise with no hazard content is N/A."
+    ],
+    "labels": [
+      {
+        "label": "Gravity",
+        "keyword_triggers": "dropped object, working at height, scaffold, ladder, handrail, harness, trip hazard, grating, hole cover, unsecured at height, slip",
+        "guidance": "Anything falling or a person falling, including same-level slips and trips. Not for loads being lifted or swinging (Motion) unless the drop itself is the stated concern."
+      },
+      {
+        "label": "Motion",
+        "keyword_triggers": "line of fire, reversing, forklift, crane in operation, swinging load, moving equipment, pedestrian route, exclusion zone, projectile",
+        "guidance": "Things or people in motion; struck-by and caught-between. Not stored machine energy (Mechanical) and not objects falling under gravity (Gravity)."
+      },
+      {
+        "label": "Mechanical",
+        "keyword_triggers": "rotating, pinch point, guard missing, caught in, wire under tension, grinder, moving parts, stored energy, machinery isolation",
+        "guidance": "Machine energy and stored mechanical energy. A removed or missing guard classifies here, not Safety Systems."
+      },
+      {
+        "label": "Electrical",
+        "keyword_triggers": "cable damaged, live, arc flash, socket, junction box open, lockout tagout, earthing, exposed wiring",
+        "guidance": "Shock, arc, and electrical isolation failures. A battery acid splash is Chemical."
+      },
+      {
+        "label": "Pressure",
+        "keyword_triggers": "hose, whip check, pressurised, bleed down, hydraulic leak, cylinder, relief valve, pressure test",
+        "guidance": "Stored or released pressure at the working level. A falling cylinder is Gravity; process-scale containment loss is Major Accident Hazard."
+      },
+      {
+        "label": "Temperature",
+        "keyword_triggers": "hot surface, steam, burn, scald, heat stress, insulation missing, cryogenic, hot work",
+        "guidance": "Thermal contact and thermal stress, hot or cold. Ambient weather cold and ice underfoot are Environment; ignition/flammable-atmosphere concerns escalate to Chemical or MAH."
+      },
+      {
+        "label": "Chemical",
+        "keyword_triggers": "chemical, fumes, H2S, gas test, COSHH, SDS, corrosive, solvent, confined space atmosphere, splash",
+        "guidance": "Harmful substances/atmospheres threatening people. A release to sea or deck drain is Environment; process loss of containment is MAH."
+      },
+      {
+        "label": "Biological",
+        "keyword_triggers": "hygiene, food, galley, mould, sewage, potable water, legionella, bites, sharps",
+        "guidance": "Biological agents and hygiene, including food safety and water quality."
+      },
+      {
+        "label": "Radiation",
+        "keyword_triggers": "radiography, NORM, UV, welding flash, laser, antenna, radar, dosimeter, radiation barrier",
+        "guidance": "Ionising and non-ionising radiation sources and controls."
+      },
+      {
+        "label": "Sound",
+        "keyword_triggers": "noise, hearing protection, ear defenders, ear plugs, decibel, noise zone",
+        "guidance": "Noise as a hearing risk. Noise as a distraction affecting performance belongs to Human Factors."
+      },
+      {
+        "label": "Safety Systems",
+        "keyword_triggers": "fire extinguisher, eyewash, alarm inhibited, interlock bypassed, escape route blocked, fire door, muster point, signage missing, lifeboat, LSA, emergency lighting, no permit",
+        "guidance": "The barrier/emergency system itself is the subject. If the barrier protects against one clear energy (machine guard, fall arrest), classify that energy instead."
+      },
+      {
+        "label": "Environment",
+        "keyword_triggers": "weather, wind limits, sea state, ice, poor lighting, visibility, spill to sea, deck drain, waste segregation, overboard",
+        "guidance": "Natural conditions risking people, and harm to the environment. Personal chemical contact is Chemical."
+      },
+      {
+        "label": "Major Accident Hazard",
+        "keyword_triggers": "loss of containment, hydrocarbon leak, gas release, gas alarm, well control, flange leak, Ex equipment, hazardous area, structural integrity",
+        "guidance": "Overrides every other label when credible process-safety content is present, even if an energy is also named."
+      },
+      {
+        "label": "Other Hazard",
+        "keyword_triggers": "manual handling, awkward lifting, posture, repetitive strain, security, unauthorised access",
+        "guidance": "A real hazard fitting none of the above. Keep small (target under ~3% of classified observations); a recurring theme should be flagged for the taxonomy owner to consider promoting to its own label."
+      },
+      {
+        "label": "N/A - No Hazard Identified",
+        "keyword_triggers": "good job, thanks, well done, keep it up, no detail",
+        "guidance": "No identifiable hazard in the text. A positive card naming a controlled hazard takes that hazard's label, not N/A."
+      }
+    ]
+  },
+  "human_factors": {
+    "field": "AI_Human_Factors_Category",
+    "precedence_rules": [
+      "Intent first. Deliberate deviation or deliberate good practice is Risk-Taking & Compliance Behaviour; unintended failure is Human Error.",
+      "Stated cause beats described act. When the text names why the act happened, classify the cause: \"didn't isolate because the procedure is unclear\" is Procedures & Documentation, not Human Error.",
+      "The most specific factor evidenced in the text wins; do not infer factors that are not written.",
+      "Performance shaper, not energy. Workplace and equipment content is classified here only as an influence on performance; the energy threat itself belongs to the Hazard dimension.",
+      "Fatigue and fitness-for-duty content in any form (roster, rest, alertness, heat exhaustion as a state) goes to Fatigue & Fitness for Duty.",
+      "Positive observations receive the factor demonstrated (a well-led toolbox talk is Leadership & Supervision). Pure praise with no factor content is N/A."
+    ],
+    "labels": [
+      {
+        "label": "Organisational Systems & Culture",
+        "keyword_triggers": "manning, roster system, management of change, permit system, always done this way, client pressure, waiting on parts",
+        "guidance": "Systems, resourcing, culture, and external pressure. Procedure content goes to Procedures & Documentation."
+      },
+      {
+        "label": "Procedures & Documentation",
+        "keyword_triggers": "no procedure, out of date, doesn't match the plant, checklist missing, conflicting instructions, drawing wrong",
+        "guidance": "The written basis of work is missing, wrong, or unusable -- whether absent or impractical."
+      },
+      {
+        "label": "Leadership & Supervision",
+        "keyword_triggers": "supervisor, toolbox talk, unsupervised, condoned, led by example, failed to enforce, leadership visit",
+        "guidance": "Line leadership quality, negative or positive."
+      },
+      {
+        "label": "Communication & Handover",
+        "keyword_triggers": "handover, pre-job brief, radio, miscommunication, not informed, wrong information, language barrier",
+        "guidance": "Safety-critical information passing between people, shifts, crews, or vessel and shore."
+      },
+      {
+        "label": "Training, Competence & Experience",
+        "keyword_triggers": "training, competence, unfamiliar, inexperienced, new to task, certification, induction, mentoring",
+        "guidance": "Knowledge, skills, and experience -- gaps or demonstrated strengths."
+      },
+      {
+        "label": "Planning, Workload & Time Pressure",
+        "keyword_triggers": "rushed, time pressure, workload, poor plan, no plan, SIMOPS, conflicting jobs, awkward sequence",
+        "guidance": "How the job is planned and loaded. Roster-driven tiredness goes to Fatigue & Fitness for Duty."
+      },
+      {
+        "label": "Equipment, Tools & Workplace Design",
+        "keyword_triggers": "wrong tool, defective, improvised, not available, poor design, confusing display, poor lighting, cramped access",
+        "guidance": "Tools, interfaces, and designed conditions as performance shapers. The energy threat itself belongs to the Hazard dimension."
+      },
+      {
+        "label": "Fatigue & Fitness for Duty",
+        "keyword_triggers": "tired, fatigue, long shift, back-to-back, night shift, no rest, alertness, not fit for duty",
+        "guidance": "The person's physical or mental state relative to the task, from any cause."
+      },
+      {
+        "label": "Human Error",
+        "keyword_triggers": "forgot, missed a step, misread, misjudged, accidentally, overlooked, didn't notice",
+        "guidance": "Unintentional failure. If the text states why it happened, classify the stated cause instead."
+      },
+      {
+        "label": "Risk-Taking & Compliance Behaviour",
+        "keyword_triggers": "shortcut, didn't follow procedure, chose not to, PPE not worn, complacency, took a risk, intervened, stopped the job",
+        "guidance": "Deliberate deviation -- or deliberate good practice such as intervening and stopping the job."
+      },
+      {
+        "label": "N/A",
+        "keyword_triggers": "good job, thanks, well done, no detail",
+        "guidance": "No human-factor content. A positive card demonstrating a factor takes that factor's label."
+      }
+    ]
+  },
+  "design_principles": [
+    "Keywords suggest, they do not decide -- the definitions and precedence rules govern, and the AI should reason from context, not just string-match.",
+    "One primary label per dimension per card, always. Never return multiple labels for one dimension.",
+    "Behaviour/intent is never a Hazard label -- it always belongs to Human Factors. Conversely, workplace/equipment 'performance shaper' content is never a Hazard label -- the energy threat itself is Hazard, the influence on performance is Human Factors (Equipment, Tools & Workplace Design)."
+  ]
+}

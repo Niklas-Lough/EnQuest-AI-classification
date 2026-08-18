@@ -2,8 +2,22 @@
 numpy==1.26.4
 pandas==2.2.2
 sqlalchemy==2.0.32
-pyodbc==5.1.0
+pyodbc==5.3.0
 pyarrow==19.0.1
 fastparquet==2024.11.0
 aiohttp==3.9.3
+
+# EnQuest BBSS Hazard / Human Factors classification (Azure AI Foundry Agent
+# Service, modern Responses-API surface -- azure-ai-projects'
+# AIProjectClient.get_openai_client(agent_name=...), returning an
+# OpenAI-SDK-compatible client. NOT azure-ai-agents (the classic
+# Assistants/threads/runs surface) -- that returns 405 for this agent type.
+# Left unpinned to a minor version rather than exact-pinned like the deps
+# above: these are actively-evolving SDKs, and coding against a fixed patch
+# risks pinning to a version with a since-fixed bug. Re-pin to exact versions
+# once the pipeline is stable in production.
+azure-ai-projects>=2.1.0
+azure-identity>=1.19.0
+openai>=2.0.0
+python-dotenv>=1.0.1
 
