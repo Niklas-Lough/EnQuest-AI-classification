@@ -12,7 +12,23 @@ class EnquestSQLEngine:
     """
 
     def __init__(self, connection_str):
-        self.engine = create_engine(connection_str, fast_executemany=True)
+        # pool_pre_ping: each classification batch spends real time (potentially
+        # several minutes) doing AI calls with the DB connection sitting
+        # completely idle in the pool. Azure SQL's gateway (and often
+        # intermediate firewalls) will silently drop a TCP connection idle
+        # that long, and SQLAlchemy's pool doesn't notice by default -- it
+        # just hands back the dead connection, which fails on first use
+        # ("Communication link failure"). pre_ping adds a lightweight
+        # liveness check before handing out a pooled connection and
+        # transparently reconnects if it's gone stale.
+        # pool_recycle: belt-and-suspenders -- proactively discard and replace
+        # any connection older than 30 minutes, regardless of pre_ping.
+        self.engine = create_engine(
+            connection_str,
+            fast_executemany=True,
+            pool_pre_ping=True,
+            pool_recycle=1800,
+        )
 
     def ensure_schema(self):
         """Add the AI classification columns and review-log table if they
