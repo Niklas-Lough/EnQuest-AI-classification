@@ -5,7 +5,7 @@ reached via the OpenAI Responses API), there is currently no programmatic
 create/update path in azure-ai-projects -- Agents are created and configured
 through the Foundry portal itself. You create the Agent there (give it a
 name, e.g. "EnQuestObservationClassifier", and pick the model deployment
-to bind it to), then set ENQUEST_BBSS_FOUNDRY_AGENT_NAME to that name.
+to bind it to), then set BBSS_FOUNDRY_AGENT_NAME to that name.
 
 The agent's endpoint also rejects `instructions` and `text` (response
 format) overrides per API call ("Not allowed when agent is specified"), so

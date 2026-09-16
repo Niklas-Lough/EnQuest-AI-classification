@@ -9,9 +9,9 @@ Usage:
     python enquest_local_test.py --n 5             # first 5 rows
     python enquest_local_test.py --rowid 32792      # a single specific row
 
-Requires ENQUEST_BBSS_FOUNDRY_PROJECT_ENDPOINT (the bare project endpoint)
-and ENQUEST_BBSS_FOUNDRY_AGENT_NAME (the Agent's name as configured in the
-Foundry portal) to be set. ENQUEST_BBSS_FOUNDRY_MODEL_DEPLOYMENT is optional.
+Requires BBSS_FOUNDRY_PROJECT_ENDPOINT (the bare project endpoint)
+and BBSS_FOUNDRY_AGENT_NAME (the Agent's name as configured in the
+Foundry portal) to be set. BBSS_FOUNDRY_MODEL_DEPLOYMENT is optional.
 No DB connection string is needed for this script.
 
 Also requires the agent's Instructions field (in the Foundry portal) to

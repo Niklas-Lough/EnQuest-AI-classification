@@ -1,7 +1,7 @@
 @echo off
 
 :: Hardcode or dynamically set the correct Python path and job path
-set PYTHON_PATH=%HOME%\python3122x64\python.exe
+set PYTHON_PATH=%HOME%\python3111x64\python.exe
 set JOB_PATH=%HOME%\site\wwwroot\App_Data\jobs\triggered\EnQuest-BBSS-Classification-Webjob\EnQuest_BBSS_Classification_WebJob
 
 :: Optional: Add Scripts directory to PATH

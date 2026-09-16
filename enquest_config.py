@@ -10,7 +10,7 @@ except ImportError:
 # Mirrors the env-var-driven style already used for the other customer in main.py,
 # kept separate so neither customer's config can be accidentally cross-wired.
 
-DB_CONNECTION_ENV = "ENQUEST_BBSS_PROD_CONNECTION"
+DB_CONNECTION_ENV = "BBSS_PROD_CONNECTION"
 
 # Azure AI Foundry project + Agent used for classification. This targets the
 # modern Foundry Agent Service (OpenAI Responses API), reached via
@@ -23,18 +23,18 @@ DB_CONNECTION_ENV = "ENQUEST_BBSS_PROD_CONNECTION"
 # -- NOT the full agent-specific endpoint the Foundry portal shows you
 # (which looks like ".../agents/<agent-name>/endpoint/protocols/openai/responses").
 # The SDK builds that longer URL itself from the project endpoint + agent name.
-FOUNDRY_PROJECT_ENDPOINT_ENV = "ENQUEST_BBSS_FOUNDRY_PROJECT_ENDPOINT"
+FOUNDRY_PROJECT_ENDPOINT_ENV = "BBSS_FOUNDRY_PROJECT_ENDPOINT"
 
 # The Agent's name as configured in the Foundry portal (e.g. "EnQuestObservationClassifier").
 # The agent must already exist in the portal -- there is currently no
 # programmatic create/update path for this agent type in azure-ai-projects.
-FOUNDRY_AGENT_NAME_ENV = "ENQUEST_BBSS_FOUNDRY_AGENT_NAME"
+FOUNDRY_AGENT_NAME_ENV = "BBSS_FOUNDRY_AGENT_NAME"
 
 # Optional. The underlying model deployment name (e.g. "gpt-5-mini"). Since
 # the endpoint is already scoped to a specific agent, this can usually be
 # left unset -- the agent's own bound model applies, and the SDK omits the
 # field entirely from the request when this is None.
-FOUNDRY_MODEL_DEPLOYMENT_ENV = "ENQUEST_BBSS_FOUNDRY_MODEL_DEPLOYMENT"
+FOUNDRY_MODEL_DEPLOYMENT_ENV = "BBSS_FOUNDRY_MODEL_DEPLOYMENT"
 
 TABLE_NAME = "dbo.FormData_Master"
 REVIEW_LOG_TABLE_NAME = "dbo.AI_Classification_Review_Log"
