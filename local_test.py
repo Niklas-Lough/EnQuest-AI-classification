@@ -1,13 +1,13 @@
 """Local, DB-free smoke test for the EnQuest BBSS Foundry classification
 agent. Reads real sample rows from test_fixtures/sample_observations.csv,
 sends each through the live agent, and prints the results for manual
-verification against the taxonomy in enquest_taxonomy.json -- it never
+verification against the taxonomy in taxonomy.json -- it never
 touches dbo.FormData_Master or the review log table.
 
 Usage:
-    python enquest_local_test.py                  # first 15 rows
-    python enquest_local_test.py --n 5             # first 5 rows
-    python enquest_local_test.py --rowid 32792      # a single specific row
+    python local_test.py                  # first 15 rows
+    python local_test.py --n 5             # first 5 rows
+    python local_test.py --rowid 32792      # a single specific row
 
 Requires BBSS_FOUNDRY_PROJECT_ENDPOINT (the bare project endpoint)
 and BBSS_FOUNDRY_AGENT_NAME (the Agent's name as configured in the
@@ -15,7 +15,7 @@ Foundry portal) to be set. BBSS_FOUNDRY_MODEL_DEPLOYMENT is optional.
 No DB connection string is needed for this script.
 
 Also requires the agent's Instructions field (in the Foundry portal) to
-already contain the taxonomy prompt -- run enquest_agent_setup.py to print
+already contain the taxonomy prompt -- run agent_setup.py to print
 it if you haven't pasted it in yet. This script only sends observation
 text per call; the agent type here rejects per-call instructions overrides.
 """
@@ -24,9 +24,9 @@ import asyncio
 import csv
 import textwrap
 
-import enquest_config as config
-from enquest_classifier_client import EnquestClassifierClient
-from enquest_prompt import load_taxonomy, build_observation_text
+import config as config
+from classifier_client import EnquestClassifierClient
+from prompt import load_taxonomy, build_observation_text
 
 DEFAULT_CSV = "test_fixtures/sample_observations.csv"
 
@@ -96,14 +96,14 @@ async def main():
         print(f"RowId {row['RowId']}")
         print(f"  Text: {_wrap(text)}")
         if result is None:
-            print("  ** CLASSIFICATION FAILED (see enquest_classification.log / stderr) **")
+            print("  ** CLASSIFICATION FAILED (see classification.log / stderr) **")
             continue
         print(f"  Hazard:         {result['hazard_label']}  [{result['hazard_confidence']}]")
         print(f"  Human Factors:  {result['human_factors_label']}  [{result['human_factors_confidence']}]")
 
     print("=" * 100)
     failed = sum(1 for _, _, r in results if r is None)
-    print(f"\n{len(results) - failed}/{len(results)} classified. Compare each against enquest_taxonomy.json's precedence rules.")
+    print(f"\n{len(results) - failed}/{len(results)} classified. Compare each against taxonomy.json's precedence rules.")
 
 
 if __name__ == "__main__":

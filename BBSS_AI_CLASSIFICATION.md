@@ -13,15 +13,15 @@ The two new fields, `AI_Hazard_Category` and `AI_Human_Factors_Category`, live d
 
 ## How It Works
 
-**Taxonomy as data, not code.** `enquest_taxonomy.json` holds every label's definition, keyword triggers, disambiguation guidance, and the precedence rules that resolve overlapping cases (e.g. "Major Accident Hazard overrides everything," "stated cause beats described act" for Human Error vs. Risk-Taking Behaviour). It can be retuned without a code deploy.
+**Taxonomy as data, not code.** `taxonomy.json` holds every label's definition, keyword triggers, disambiguation guidance, and the precedence rules that resolve overlapping cases (e.g. "Major Accident Hazard overrides everything," "stated cause beats described act" for Human Error vs. Risk-Taking Behaviour). It can be retuned without a code deploy.
 
-**Classification via Azure AI Foundry Agent.** An Agent (`EnQuestObservationClassifier`), configured in the Foundry portal, receives the concatenated `Hazard_Description + Action_Taken` text for one card and returns a label and confidence (High/Medium/Low) for each dimension. The full taxonomy prompt lives in the Agent's portal-configured Instructions field — this project's Agent type doesn't accept per-call instruction overrides, so the portal is the single source of truth for classification behaviour. `enquest_agent_setup.py` prints the current instructions (generated from the taxonomy file) for pasting in whenever the taxonomy changes.
+**Classification via Azure AI Foundry Agent.** An Agent (`EnQuestObservationClassifier`), configured in the Foundry portal, receives the concatenated `Hazard_Description + Action_Taken` text for one card and returns a label and confidence (High/Medium/Low) for each dimension. The full taxonomy prompt lives in the Agent's portal-configured Instructions field — this project's Agent type doesn't accept per-call instruction overrides, so the portal is the single source of truth for classification behaviour. `agent_setup.py` prints the current instructions (generated from the taxonomy file) for pasting in whenever the taxonomy changes.
 
 **Confidence-driven retry.** If either dimension comes back Low confidence, the whole card is re-classified up to two extra times. A card is never left unclassified over confidence alone — the best result is always persisted. Any dimension still Low after the retry budget is exhausted is written to a lightweight review log (`dbo.AI_Classification_Review_Log`) rather than cluttering the main schema, so it can be triaged by a human during the pilot without needing to touch every row.
 
 **Idempotent, resumable execution.** One shared function, `classify_observations()`, backs both entry points:
-- `enquest_backfill.py` — on-demand run for the historical dataset, with `--force` (reclassify everything) and `--concurrency` (tune parallel Agent calls) options.
-- `enquest_main.py` — the daily scheduled webjob, which by default only processes cards where both AI fields are still `NULL`.
+- `backfill.py` — on-demand run for the historical dataset, with `--force` (reclassify everything) and `--concurrency` (tune parallel Agent calls) options.
+- `main.py` — the daily scheduled webjob, which by default only processes cards where both AI fields are still `NULL`.
 
 Re-running either is always safe: already-classified cards are skipped unless `--force` is used.
 
@@ -54,7 +54,7 @@ This is a level of structure the raw free-text `Hazard_Description`/`Action_Take
 
 **Coaching/training recommendations.** Human Factors trends at a facility or company level could feed a recommendation loop — e.g. a facility trending high on Fatigue & Fitness for Duty gets a suggested toolbox talk topic, rather than someone having to notice the pattern manually.
 
-**Review-log-driven taxonomy improvement.** The review log isn't just a triage queue — corrections made there during the pilot are the natural feedback source for retuning `enquest_taxonomy.json`'s keyword libraries and precedence rules over time.
+**Review-log-driven taxonomy improvement.** The review log isn't just a triage queue — corrections made there during the pilot are the natural feedback source for retuning `taxonomy.json`'s keyword libraries and precedence rules over time.
 
 ## Recommended Next Steps
 

@@ -1,8 +1,8 @@
 @echo off
 
 :: Hardcode or dynamically set the correct Python path and job path
-set PYTHON_PATH=%HOME%\python3122x64\python.exe
-set JOB_PATH=%HOME%\site\wwwroot\App_Data\jobs\triggered\SPA-DemoInd-Classification-Webjob\SPA_DemoInd_Classification_WebJob
+set PYTHON_PATH=%HOME%\python3111x64\python.exe
+set JOB_PATH=%HOME%\site\wwwroot\App_Data\jobs\triggered\BBSS-Classification-Webjob\BBSS_Classification_WebJob
 
 :: Optional: Add Scripts directory to PATH
 set PATH=%PATH%;%PYTHON_PATH%\Scripts

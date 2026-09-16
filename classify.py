@@ -2,11 +2,11 @@ import logging
 import asyncio
 from datetime import datetime
 
-import enquest_config as config
-from enquest_sql_engine import EnquestSQLEngine
-from enquest_classifier_client import EnquestClassifierClient
-from enquest_process_batch import process_batch
-from enquest_prompt import load_taxonomy
+import config as config
+from sql_engine import EnquestSQLEngine
+from classifier_client import EnquestClassifierClient
+from process_batch import process_batch
+from prompt import load_taxonomy
 
 
 async def classify_observations(force=False, limit=1_000_000, concurrency=None):
@@ -21,7 +21,7 @@ async def classify_observations(force=False, limit=1_000_000, concurrency=None):
     Use this after a taxonomy revision (new label, retuned keywords,
     changed precedence rules) -- but note the agent's portal-configured
     Instructions field must also be updated to match (re-run
-    enquest_agent_setup.py to print the new text and paste it in), since
+    agent_setup.py to print the new text and paste it in), since
     that's the only place classification behaviour lives for this agent type.
 
     concurrency: overrides config.CONCURRENCY for this run only (e.g. a

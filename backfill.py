@@ -2,18 +2,18 @@ import argparse
 import logging
 import asyncio
 
-import enquest_config as config
-from enquest_classify import classify_observations
+import config as config
+from classify import classify_observations
 
 # On-demand / backfill entry point for an EnQuest team member to trigger
 # manually, e.g. right after this feature ships to classify the full
 # historical dataset, or after a taxonomy revision with --force.
 #
 # Usage:
-#   python enquest_backfill.py                     # classify only unclassified cards
-#   python enquest_backfill.py --force              # reclassify every card
-#   python enquest_backfill.py --limit 5000         # cap how many cards this run processes
-#   python enquest_backfill.py --concurrency 10     # raise parallel agent calls for this run
+#   python backfill.py                     # classify only unclassified cards
+#   python backfill.py --force              # reclassify every card
+#   python backfill.py --limit 5000         # cap how many cards this run processes
+#   python backfill.py --concurrency 10     # raise parallel agent calls for this run
 
 
 def parse_args():

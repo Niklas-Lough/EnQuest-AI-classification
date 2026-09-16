@@ -42,7 +42,7 @@ REVIEW_LOG_TABLE_NAME = "dbo.AI_Classification_Review_Log"
 HAZARD_FIELD = "AI_Hazard_Category"
 HUMAN_FACTORS_FIELD = "AI_Human_Factors_Category"
 
-TAXONOMY_FILE = os.path.join(os.path.dirname(__file__), "enquest_taxonomy.json")
+TAXONOMY_FILE = os.path.join(os.path.dirname(__file__), "taxonomy.json")
 
 BATCH_SIZE = 500
 CONCURRENCY = 3
@@ -63,7 +63,7 @@ RETRY_DELAY_SECONDS = 2
 # "the model is unsure" signal, not something to keep retrying forever.
 MAX_CONFIDENCE_RETRIES = 2
 
-LOG_FILE = "enquest_classification.log"
+LOG_FILE = "classification.log"
 
 
 def get_db_connection_string():

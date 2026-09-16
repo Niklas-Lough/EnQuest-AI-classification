@@ -6,15 +6,15 @@ import re
 from azure.ai.projects.aio import AIProjectClient
 from azure.identity.aio import DefaultAzureCredential
 
-from enquest_prompt import hazard_labels, human_factors_labels
+from prompt import hazard_labels, human_factors_labels
 
 _CODE_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 
 
 class EnquestClassifierClient:
     """Calls a pre-provisioned Azure AI Foundry Agent (created and
-    configured via the Foundry portal -- see enquest_config.py and
-    enquest_agent_setup.py) via the OpenAI Responses API to assign one
+    configured via the Foundry portal -- see config.py and
+    agent_setup.py) via the OpenAI Responses API to assign one
     Hazard label and one Human Factors label per observation, per the
     BBSS AI Classification Taxonomy.
 
@@ -22,8 +22,8 @@ class EnquestClassifierClient:
     `text` (response_format) on the request -- "Not allowed when agent is
     specified" -- so classification behaviour is controlled entirely by
     the agent's portal-configured Instructions field (built from
-    enquest_taxonomy.json via enquest_prompt.build_agent_instructions and
-    pasted in manually; see enquest_agent_setup.py). Only the observation
+    taxonomy.json via prompt.build_agent_instructions and
+    pasted in manually; see agent_setup.py). Only the observation
     text is sent per call. Whenever the taxonomy changes, re-print the
     instructions and re-paste them into the portal.
 

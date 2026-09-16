@@ -1,6 +1,6 @@
 import json
 
-import enquest_config as config
+import config as config
 
 
 def load_taxonomy():
@@ -29,8 +29,8 @@ def build_agent_instructions(taxonomy):
     `instructions` (or `text`/response_format) override per API call --
     "Not allowed when agent is specified" -- so the portal-configured
     instructions are the only place this can live. Re-run this (via
-    enquest_agent_setup.py) and re-paste into the portal whenever
-    enquest_taxonomy.json changes.
+    agent_setup.py) and re-paste into the portal whenever
+    taxonomy.json changes.
 
     Since structured-output JSON schema enforcement also can't be sent
     per-call, the required output shape is spelled out explicitly here
@@ -87,7 +87,7 @@ def build_response_json_schema(taxonomy):
     per API call for this agent type (the `text` param is rejected once an
     agent is specified) -- kept here only in case the Foundry portal's own
     Agent configuration UI offers a place to set structured-output
-    enforcement, and printed for reference by enquest_agent_setup.py.
+    enforcement, and printed for reference by agent_setup.py.
     Actual enforcement is via the OUTPUT FORMAT section of
     build_agent_instructions() plus lenient client-side parsing."""
     return {

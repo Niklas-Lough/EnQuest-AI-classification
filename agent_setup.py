@@ -14,7 +14,7 @@ the agent's "Instructions" field in the portal. This script does NOT create
 or modify the agent. It does two things:
 
 1. REQUIRED, once and after every taxonomy change: prints the full
-   instructions text (built from enquest_taxonomy.json) for you to copy
+   instructions text (built from taxonomy.json) for you to copy
    and paste into the portal's Agent > Instructions field.
 2. Optional: a lightweight connectivity check -- sends one real
    classification call for a trivial observation and confirms a
@@ -22,16 +22,16 @@ or modify the agent. It does two things:
    name/instructions problems before running the full local test or backfill.
 
 Usage:
-    python enquest_agent_setup.py              # print instructions to paste into the portal
-    python enquest_agent_setup.py --check       # also do the connectivity check
+    python agent_setup.py              # print instructions to paste into the portal
+    python agent_setup.py --check       # also do the connectivity check
 """
 import argparse
 import asyncio
 import json
 
-import enquest_config as config
-from enquest_prompt import load_taxonomy, build_agent_instructions, build_response_json_schema
-from enquest_classifier_client import EnquestClassifierClient
+import config as config
+from prompt import load_taxonomy, build_agent_instructions, build_response_json_schema
+from classifier_client import EnquestClassifierClient
 
 
 def parse_args():
@@ -52,7 +52,7 @@ async def run_check(taxonomy):
         result = await classifier.classify("Great teamwork. Congratulated team.", row_id="connectivity-check")
 
     if result is None:
-        print("FAILED -- see log output above / enquest_classification.log for details.")
+        print("FAILED -- see log output above / classification.log for details.")
         print("If the failure mentions JSON parsing, the agent's Instructions field likely")
         print("doesn't have the taxonomy prompt pasted in yet -- copy the text printed above.")
     else:
