@@ -35,7 +35,7 @@ def build_agent_instructions(taxonomy):
     Since structured-output JSON schema enforcement also can't be sent
     per-call, the required output shape is spelled out explicitly here
     instead, and the client parses leniently (see
-    EnquestClassifierClient._parse_response).
+    ClassifierClient._parse_response).
     """
     hazard = taxonomy["hazard"]
     hf = taxonomy["human_factors"]

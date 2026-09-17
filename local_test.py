@@ -1,4 +1,4 @@
-"""Local, DB-free smoke test for the EnQuest BBSS Foundry classification
+"""Local, DB-free smoke test for the BBSS Foundry classification
 agent. Reads real sample rows from test_fixtures/sample_observations.csv,
 sends each through the live agent, and prints the results for manual
 verification against the taxonomy in taxonomy.json -- it never
@@ -25,14 +25,14 @@ import csv
 import textwrap
 
 import config as config
-from classifier_client import EnquestClassifierClient
+from classifier_client import ClassifierClient
 from prompt import load_taxonomy, build_observation_text
 
 DEFAULT_CSV = "test_fixtures/sample_observations.csv"
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Run real EnQuest sample rows through the live Foundry agent for manual verification.")
+    parser = argparse.ArgumentParser(description="Run real sample rows through the live Foundry agent for manual verification.")
     parser.add_argument("--csv", default=DEFAULT_CSV, help=f"Path to the sample CSV (default: {DEFAULT_CSV})")
     parser.add_argument("--n", type=int, default=15, help="Number of rows to classify (default: 15)")
     parser.add_argument("--rowid", type=int, default=None, help="Classify only this specific RowId")
@@ -74,7 +74,7 @@ async def main():
     taxonomy = load_taxonomy()
     semaphore = asyncio.Semaphore(config.CONCURRENCY)
 
-    async with EnquestClassifierClient(
+    async with ClassifierClient(
         config.get_foundry_project_endpoint(),
         config.get_foundry_agent_name(),
         taxonomy,

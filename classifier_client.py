@@ -11,7 +11,7 @@ from prompt import hazard_labels, human_factors_labels
 _CODE_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 
 
-class EnquestClassifierClient:
+class ClassifierClient:
     """Calls a pre-provisioned Azure AI Foundry Agent (created and
     configured via the Foundry portal -- see config.py and
     agent_setup.py) via the OpenAI Responses API to assign one
@@ -35,7 +35,7 @@ class EnquestClassifierClient:
     Use as an async context manager so the underlying credential and
     client are opened/closed once per run, not once per card:
 
-        async with EnquestClassifierClient(...) as classifier:
+        async with ClassifierClient(...) as classifier:
             result = await classifier.classify(text, row_id)
     """
 

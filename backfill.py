@@ -5,7 +5,7 @@ import asyncio
 import config as config
 from classify import classify_observations
 
-# On-demand / backfill entry point for an EnQuest team member to trigger
+# On-demand / backfill entry point for a team member to trigger
 # manually, e.g. right after this feature ships to classify the full
 # historical dataset, or after a taxonomy revision with --force.
 #
@@ -17,7 +17,7 @@ from classify import classify_observations
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="EnQuest BBSS Hazard / Human Factors classification backfill.")
+    parser = argparse.ArgumentParser(description="BBSS Hazard / Human Factors classification backfill.")
     parser.add_argument("--force", action="store_true", help="Reclassify every card, even if already labelled.")
     parser.add_argument("--limit", type=int, default=1_000_000, help="Maximum number of cards to process this run.")
     parser.add_argument("--concurrency", type=int, default=None, help=f"Parallel agent calls for this run only (default: config.CONCURRENCY = {config.CONCURRENCY}).")

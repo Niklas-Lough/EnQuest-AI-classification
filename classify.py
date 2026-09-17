@@ -3,8 +3,8 @@ import asyncio
 from datetime import datetime
 
 import config as config
-from sql_engine import EnquestSQLEngine
-from classifier_client import EnquestClassifierClient
+from sql_engine import SQLEngine
+from classifier_client import ClassifierClient
 from process_batch import process_batch
 from prompt import load_taxonomy
 
@@ -31,7 +31,7 @@ async def classify_observations(force=False, limit=1_000_000, concurrency=None):
     run_start = datetime.now()
     logging.info(f"EnQuest classification run started. force={force}")
 
-    sql_engine = EnquestSQLEngine(config.get_db_connection_string())
+    sql_engine = SQLEngine(config.get_db_connection_string())
     sql_engine.ensure_schema()
 
     taxonomy = load_taxonomy()
@@ -47,7 +47,7 @@ async def classify_observations(force=False, limit=1_000_000, concurrency=None):
     confidence_exhausted = 0
     semaphore = asyncio.Semaphore(concurrency or config.CONCURRENCY)
 
-    async with EnquestClassifierClient(
+    async with ClassifierClient(
         config.get_foundry_project_endpoint(),
         config.get_foundry_agent_name(),
         taxonomy,

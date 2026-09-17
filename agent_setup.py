@@ -1,4 +1,4 @@
-"""Helper for the EnQuest BBSS Foundry Agent.
+"""Helper for the BBSS Foundry Agent.
 
 IMPORTANT: for this project's Agent type (the modern Foundry Agent Service,
 reached via the OpenAI Responses API), there is currently no programmatic
@@ -31,18 +31,18 @@ import json
 
 import config as config
 from prompt import load_taxonomy, build_agent_instructions, build_response_json_schema
-from classifier_client import EnquestClassifierClient
+from classifier_client import ClassifierClient
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Print EnQuest BBSS Foundry agent instructions to paste into the portal, optionally verify connectivity.")
+    parser = argparse.ArgumentParser(description="Print BBSS Foundry agent instructions to paste into the portal, optionally verify connectivity.")
     parser.add_argument("--check", action="store_true", help="Also send one real classification call to verify the agent is reachable and correctly configured.")
     return parser.parse_args()
 
 
 async def run_check(taxonomy):
     print("\nRunning connectivity check against the live agent...")
-    async with EnquestClassifierClient(
+    async with ClassifierClient(
         config.get_foundry_project_endpoint(),
         config.get_foundry_agent_name(),
         taxonomy,

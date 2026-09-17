@@ -2,8 +2,8 @@ from sqlalchemy import create_engine, text
 import config as config
 
 
-class EnquestSQLEngine:
-    """Data access for EnQuest BBSS Hazard / Human Factors classification.
+class BBSSSQLEngine:
+    """Data access for BBSS Hazard / Human Factors classification.
 
     Classifies dbo.FormData_Master in place (no staging table): the two AI_*
     columns live directly on the production table, and idempotent skip

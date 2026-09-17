@@ -1,0 +1,10 @@
+[09/16/2026 14:04:58 > ba1b7e: SYS INFO] Status changed to Initializing
+[09/16/2026 14:04:59 > ba1b7e: SYS INFO] Run script 'run.cmd' with script host - 'WindowsScriptHost'
+[09/16/2026 14:04:59 > ba1b7e: SYS INFO] Status changed to Running
+[09/16/2026 14:05:08 > ba1b7e: ERR ] ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'C:\\home\\site\\wwwroot\\App_Data\\jobs\\triggered\\BBSS-Classification-Webjob\\BBSS_Classification_WebJob\\requirements.txt'
+[09/16/2026 14:05:09 > ba1b7e: ERR ] 
+[09/16/2026 14:05:09 > ba1b7e: ERR ] [notice] A new release of pip is available: 23.0 -> 26.2.1
+[09/16/2026 14:05:09 > ba1b7e: ERR ] [notice] To update, run: C:\home\python3111x64\python.exe -m pip install --upgrade pip
+[09/16/2026 14:05:09 > ba1b7e: ERR ] C:\home\python3111x64\python.exe: can't open file 'C:\\home\\site\\wwwroot\\App_Data\\jobs\\triggered\\BBSS-Classification-Webjob\\BBSS_Classification_WebJob\\main.py': [Errno 2] No such file or directory
+[09/16/2026 14:05:09 > ba1b7e: SYS INFO] Status changed to Failed
+[09/16/2026 14:05:09 > ba1b7e: SYS ERR ] Job failed due to exit code 2

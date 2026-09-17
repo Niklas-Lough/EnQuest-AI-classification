@@ -6,7 +6,7 @@ try:
 except ImportError:
     pass
 
-# Per-customer settings for the EnQuest BBSS Hazard / Human Factors classification.
+# Per-customer settings for the BBSS Hazard / Human Factors classification.
 # Mirrors the env-var-driven style already used for the other customer in main.py,
 # kept separate so neither customer's config can be accidentally cross-wired.
 
@@ -50,7 +50,7 @@ MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 2
 
 # Separate from MAX_RETRIES above (which covers transport/parse failures
-# inside EnquestClassifierClient.classify). This is a business-logic retry:
+# inside ClassifierClient.classify). This is a business-logic retry:
 # if either dimension comes back Low confidence, re-run the whole card
 # (both dimensions are produced together in one call, so a retry
 # regenerates both) up to this many extra times, hoping for a more
