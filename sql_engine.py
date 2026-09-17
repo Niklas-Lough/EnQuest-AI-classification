@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, text
 import config as config
 
 
-class BBSSSQLEngine:
+class SQLEngine:
     """Data access for BBSS Hazard / Human Factors classification.
 
     Classifies dbo.FormData_Master in place (no staging table): the two AI_*
